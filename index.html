@@ -19,9 +19,9 @@
     </header>
     <main>
         
-        <table class="records">
+        <table id="tableClient" class="records">
             <thead>
-                <tr>
+             <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Celular</th>
@@ -30,36 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Kayque</td>
-                    <td>kayque@gmail.com</td>
-                    <td>(11) 99090-9090</td>
-                    <td>Santo André</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Gabriel</td>
-                    <td>gabriel@gmail.com</td>
-                    <td>(11) 92459-2759</td>
-                    <td>Garulhos</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Joao</td>
-                    <td>joao@gmail.com</td>
-                    <td>(11) 95467-5960</td>
-                    <td>Belford Roxo</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
+              
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -69,7 +40,7 @@
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form id="form" class="modal-form">
-                    <input id="nome"type="text" class="modal-field" placeholder="Nome do Cliente" required>
+                    <input id="nome"type="text" data-index= "new" class="modal-field" placeholder="Nome do Cliente" required>
                     <input id="email" type="email" class="modal-field" placeholder="e-mail do Cliente" required>
                     <input id="celular" type="text" class="modal-field" placeholder="Celular do Cliente" required>
                     <input id="cidade" type="text" class="modal-field" placeholder="Cidade do Cliente" required >
