@@ -76,6 +76,11 @@ const salvarCliente = () => {
     }
 }
 
+const cancelar = () =>{
+   limparCampos()
+    closeModal()
+}
+
 const criarLinha = (cliente, index) => {
     const novaLinha = document.createElement('tr')
     novaLinha.innerHTML = `
@@ -126,7 +131,7 @@ const editarDeletar = (evento) => {
             editarCliente(index)
         } else {
             const cliente = lerCliente()[index]
-            const response = confirm(`Você tem certeza que deseja excluir o cliente: ${cliente.nome}`)//Confirmando se o usuario quer deletar mesmo
+            const response = confirm(`Você tem certeza que deseja excluir o cliente: ${cliente.nome}`)//Confirmando se o usuario quer deletar de fato
             if (response) {
                 deletarCliente(index)
                 atualizarTabela()
@@ -146,5 +151,7 @@ document.getElementById('modalClose')  // fechar o modal quando o usuario clicar
     .addEventListener('click', closeModal)
 
 document.getElementById('salvar').addEventListener('click', salvarCliente)
+
+document.getElementById('cancelar').addEventListener('click', cancelar)
 
 document.querySelector('#tableClient>tbody').addEventListener('click', editarDeletar)
