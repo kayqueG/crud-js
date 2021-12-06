@@ -10,7 +10,9 @@ const closeModal = () => {
 
 }
 
+//Pegando o banco de dados
 const getLocalStorage = () => JSON.parse(localStorage.getItem("db_cliente")) ?? [] // passando de string para objeto de novo e verificando se é nulo, se for, retorna um array vazio
+
 
 const setLocalStorage = (db_cliente) => localStorage.setItem("db_cliente", JSON.stringify(db_cliente))
 
@@ -43,17 +45,25 @@ const criarCliente = (cliente) => {
 
 }
 
+//Verificando se todos os requisitos do html foram atendidos
 const camposValidos = () => {
-    return document.getElementById("form").reportValidity() // retorna verdadeiro se todos os requisitos do html foram atendidos
+    return document.getElementById("form").reportValidity()
 }
 
+
+//Limpando os campos do modal
 const limparCampos = () => {
     const campos = document.querySelectorAll('.modal-field')
     campos.forEach(campo => campo.value = "") // deixando cada campo vazio depois do cadastro
     document.getElementById('nome').dataset.index = 'new'
 }
 
-//Interação com o usuario
+
+//               -------Interação com o usuario---------
+
+
+
+//Salvando cliente
 const salvarCliente = () => {
     if (camposValidos()) {
         const cliente = {
@@ -76,11 +86,13 @@ const salvarCliente = () => {
     }
 }
 
-const cancelar = () =>{
-   limparCampos()
+//Botao cancelar
+const cancelar = () => {
+    limparCampos()
     closeModal()
 }
 
+//Adicionando uma linha para a tabela
 const criarLinha = (cliente, index) => {
     const novaLinha = document.createElement('tr')
     novaLinha.innerHTML = `
@@ -97,16 +109,20 @@ const criarLinha = (cliente, index) => {
 
 }
 
+//Limpando a tabela
 const limparTabela = () => {
     const linhas = document.querySelectorAll('#tableClient>tbody tr')
     linhas.forEach(linha => linha.parentNode.removeChild(linha))
 }
+
+//Atualizar os dados da tabela
 const atualizarTabela = () => {
     const db_cliente = lerCliente()
     limparTabela()
     db_cliente.forEach(criarLinha)
 }
 
+//Pegando os atributos passados e inserindo no objeto cliente
 const preencherCampos = (cliente) => {
     document.getElementById("nome").value = cliente.nome
     document.getElementById("email").value = cliente.email
@@ -115,6 +131,7 @@ const preencherCampos = (cliente) => {
     document.getElementById("nome").dataset.index = cliente.index
 }
 
+//Editando os dados do cliente
 const editarCliente = (index) => {
 
     const cliente = lerCliente()[index]
@@ -123,6 +140,8 @@ const editarCliente = (index) => {
     openModal()
 }
 
+
+//Função que chama um metodo para deletar ou editar os dados do cliente
 const editarDeletar = (evento) => {
     if (evento.target.type == 'button') {
         const [action, index] = evento.target.id.split('-')
@@ -144,14 +163,19 @@ const editarDeletar = (evento) => {
 
 atualizarTabela()
 
-document.getElementById('cadastrarCliente') // abrir o modal quando o usuario clicar em cadastrar cliente
+// Abrir o modal quando o usuario clicar em cadastrar cliente
+document.getElementById('cadastrarCliente')
     .addEventListener('click', openModal)
 
-document.getElementById('modalClose')  // fechar o modal quando o usuario clicar em  fechar
+// Fechar o modal quando o usuario clicar em  fechar
+document.getElementById('modalClose')
     .addEventListener('click', closeModal)
 
+//"Ouvindo" o evento click para salvar cliente
 document.getElementById('salvar').addEventListener('click', salvarCliente)
 
+//"Ouvindo" o evento click para cancelar o cadastro
 document.getElementById('cancelar').addEventListener('click', cancelar)
 
+//"Ouvindo" o evento click para editar/deletar cliente
 document.querySelector('#tableClient>tbody').addEventListener('click', editarDeletar)
